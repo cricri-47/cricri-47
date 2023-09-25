@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 2</title>
+    <link rel="icon" href="settings_32.png">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  background-image: url("/Sand3.jpg");
+  background-size: cover;
+
+}
+.slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+   background-image: linear-gradient(to right, rgba(250, 150, 150, 0.7), rgba(150, 20, 20, 0.7));
+ 
+  outline: 2px solid black;
+  outline-offset: 3px
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+    background-image: linear-gradient(to right, rgba(250, 150, 150, 1), rgba(150, 30, 30,1));
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #AAAAAA;
+  outline: 2px solid black;
+  outline-offset: 5px
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 35px;
+  background: #04AA6D;
+  cursor: pointer;
+}
+.slider1 {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+   background-image: linear-gradient(to right, rgba(150, 250, 150, 0.7), rgba(20, 150, 20, 0.7));
+ 
+   outline: 2px solid black;
+  outline-offset: 3px
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider1:hover {
+    background-image: linear-gradient(to right, rgba(150,250, 150, 1), rgba(30, 150, 30,1));
+}
+
+.slider1::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #AAAAAA;
+  outline: 2px solid black;
+  outline-offset: 5px
+  cursor: pointer;
+}
+
+.slider1::-moz-range-thumb {
+  width: 25px;
+  height: 15px;
+  background: #04AA6D;
+  outline-offset: 5px
+  cursor: pointer;
+}
+.slider2 {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+   background-image: linear-gradient(to right, rgba(150, 150, 250, 0.7), rgba(20, 20, 150, 0.7));
+ 
+    outline: 2px solid black;
+  outline-offset: 3px
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider2:hover {
+    background-image: linear-gradient(to right, rgba(150,150, 250, 1), rgba(30, 30, 150,1));
+}
+
+.slider2::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #AAAAAA;
+  outline: 2px solid black;
+  outline-offset: 5px
+  cursor: pointer;
+}
+
+.slider2::-moz-range-thumb {
+  width: 25px;
+  height: 15px;
+  background: #04AA6D;
+  outline-offset: 5px
+  cursor: pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Custom Range Slider</h1>
+<p>Drag the slider to display the current value.</p>
+<p2><h1><center>Rouge :</center></h1></p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="256" value="50" class="slider" id="col_r">
+  <p>Value: <span id="r_1"></span></p>
+</div>
+<p>Vert :</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="256" value="50" class="slider1" id="col_g">
+  <p>Value: <span id="g_1"></span></p>
+</div>
+<p>Bleu :</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="256" value="50" class="slider2" id="col_b">
+  <p>Value: <span id="b_1"></span></p>
+</div>
+<h1>HTML5 Canvas</h1>
+
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid grey;"></canvas>
+
+
+<p><a href="page1.html">Retour page 1</a></p>
+
+<script>
+var slid_r = document.getElementById("col_r");
+var out_r = document.getElementById("r_1");
+out_r.innerHTML = slid_r.value;
+
+var slid_g = document.getElementById("col_g");
+var out_g = document.getElementById("g_1");
+out_g.innerHTML = slid_g.value;
+
+var slid_b = document.getElementById("col_b");
+var out_b = document.getElementById("b_1");
+out_b.innerHTML = slid_b.value;
+
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+
+
+slid_r.oninput = function() {
+  out_r.innerHTML = this.value;
+  var xhr_r = new XMLHttpRequest();
+  xhr_r.open("GET", "/slider_r?" + this.value, true);
+  xhr_r.send();
+}
+slid_g.oninput = function() {
+  out_g.innerHTML = this.value;
+  var xhr_g = new XMLHttpRequest();
+  xhr_g.open("GET", "/slider_g?" + this.value, true);
+  xhr_g.send();
+}
+slid_b.oninput = function() {
+  out_b.innerHTML = this.value;
+  var xhr_b = new XMLHttpRequest();
+  xhr_b.open("GET", "/slider_b?" + this.value, true);
+  xhr_b.send();
+}
+</script> 
+
+</body>
+</html>
+

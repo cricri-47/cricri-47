@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page 1</title>
+    <link rel="icon" href="data:,">
+<style>
+body {
+  background-image: url("/Sand3.jpg");
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+    <h1>Ceci est la page 1</h1>
+    <label for="slider">Curseur :</label>
+    <input type="range" id="slider" name="slider" min="0" max="100" value="50">
+    <p>Valeur : <span id="sliderValue">{{analog_value}}</span></p>
+    <p><a href="page3.html">Retour page 3</a></p>
+    <p><a href="page1.html">Retour page 1</a></p>
+     <p><a href="bulb.html">go bulb</a></p>
+    <p><a href="index.html">Retour index</a></p>
+    
+    <script>
+        var slider = document.getElementById("slider");
+        var sliderValue = document.getElementById("sliderValue");
+
+        slider.oninput = function() {
+            sliderValue.innerHTML = this.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/slider?" + this.value, true);
+            xhr.send();
+        };
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+    
