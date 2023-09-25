@@ -57,8 +57,8 @@ def serve_page_c(page_name, c_r, c_g, c_b):
     except:
         return "Page_c not found"
 
-ssid = "bureau 2.4G"
-password = "erwannetpicasso"
+ssid = "YOUR_SSID"
+password = "YOUR_PASSWORD"
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
