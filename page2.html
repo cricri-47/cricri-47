@@ -2,14 +2,36 @@
 <html>
 <head>
     <title>Page 2</title>
-    <link rel="icon" href="settings_32.png">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
+   <link rel="icon" href="bucket_16.png">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <style>
+
 body {
+  background-color: rgb(200, 200, 200);
+  font-size: 100%;
+  font-family: Lato, Arial, sans-serif;
+  padding: 0;
+  margin: 2;
+}
+
+main {
+  display: block;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 1em auto;
+  padding: 1em 2em;
+  color: #000;
   background-image: url("/Sand3.jpg");
   background-size: cover;
-
+  border: .07em solid rgba(0,0,0,.5);
+  border-radius: .5em;
 }
+
+/*-- forms --*/
+body{color:#444;font:120%/1.4 sans-serif;}
+
+
+
 .slidecontainer {
   width: 100%;
 }
@@ -17,6 +39,7 @@ body {
 .slider {
   -webkit-appearance: none;
   width: 100%;
+ 
   height: 25px;
    background-image: linear-gradient(to right, rgba(250, 150, 150, 0.7), rgba(150, 20, 20, 0.7));
  
@@ -121,35 +144,32 @@ body {
 </style>
 </head>
 <body>
-
-<h1>Custom Range Slider</h1>
+<main>
+<Center><h1>Reglages eclairage</h1>
 <p>Drag the slider to display the current value.</p>
-<p2><h1><center>Rouge :</center></h1></p>
+</Center>
+<p2><h1> Rouge : <span id="r_1"> </span> </h1></p>
 <div class="slidecontainer">
   <input type="range" min="1" max="256" value="50" class="slider" id="col_r">
-  <p>Value: <span id="r_1"></span></p>
-</div>
-<p>Vert :</p>
+  </div>
+<p2><h1> Vert : <span id="g_1"></span></h1></p>
 <div class="slidecontainer">
   <input type="range" min="1" max="256" value="50" class="slider1" id="col_g">
-  <p>Value: <span id="g_1"></span></p>
-</div>
-<p>Bleu :</p>
+ </div>
+<p2><h1> Bleu : <span id="b_1"></span></h1></p>
 <div class="slidecontainer">
   <input type="range" min="1" max="256" value="50" class="slider2" id="col_b">
-  <p>Value: <span id="b_1"></span></p>
-</div>
-<h1>HTML5 Canvas</h1>
-
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid grey;"></canvas>
-
+ </div>
+<Center>
 
 <p><a href="page1.html">Retour page 1</a></p>
 
 <script>
+
 var slid_r = document.getElementById("col_r");
 var out_r = document.getElementById("r_1");
 out_r.innerHTML = slid_r.value;
+
 
 var slid_g = document.getElementById("col_g");
 var out_g = document.getElementById("g_1");
@@ -159,9 +179,12 @@ var slid_b = document.getElementById("col_b");
 var out_b = document.getElementById("b_1");
 out_b.innerHTML = slid_b.value;
 
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
 
+
+
+function update() {
+    document.body.style.backgroundColor = "rgb(" + out_r.innerHTML+ "," + out_g.innerHTML + "," + out_b.innerHTML + ")" ;
+    }
 
 
 slid_r.oninput = function() {
@@ -169,21 +192,26 @@ slid_r.oninput = function() {
   var xhr_r = new XMLHttpRequest();
   xhr_r.open("GET", "/slider_r?" + this.value, true);
   xhr_r.send();
+  update();
 }
 slid_g.oninput = function() {
   out_g.innerHTML = this.value;
+
   var xhr_g = new XMLHttpRequest();
   xhr_g.open("GET", "/slider_g?" + this.value, true);
   xhr_g.send();
+  update();
 }
 slid_b.oninput = function() {
   out_b.innerHTML = this.value;
   var xhr_b = new XMLHttpRequest();
   xhr_b.open("GET", "/slider_b?" + this.value, true);
   xhr_b.send();
+  update();
 }
 </script> 
 
 </body>
 </html>
 
+ 
