@@ -1,0 +1,224 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Page 3</title>
+    <link rel="icon" href="bucket_16.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+   <style>
+
+body {
+  background-color: #6D695C;
+  background-image: url("/Sand3.jpg");
+  background-size: cover;
+  font-size: 100%;
+  color: #333;
+  font-family: Lato, Arial, sans-serif;
+  padding: 0;
+  margin: 2;
+}
+
+main {
+  display: block;
+  box-sizing: border-box;
+  width: 90%;
+  margin: 1em auto;
+  padding: 1em 2em;
+  color: #000;
+  background-color: rgba(244,247,245,.9);
+  border: .07em solid rgba(0,0,0,.5);
+  border-radius: .5em;
+}
+
+/*-- forms --*/
+body{color:#444;font:120%/1.4 sans-serif;}
+
+
+/* CUSTOM RADIO & CHECKBOXES
+   http://stackoverflow.com/a/17541916/383904 */
+.rad,
+.ckb{
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.rad > input,
+.ckb > input{ /* HIDE ORG RADIO & CHECKBOX */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* RADIO & CHECKBOX STYLES */
+/* DEFAULT <i> STYLE */
+.rad > i,
+.ckb > i{ 
+  display: inline-block;
+  vertical-align: middle;
+  height: 22px;
+  transition: 0.3s;
+  box-shadow: inset 0 0 0 16px #fff;
+  border: 1px solid gray;
+  background: Silver;
+}
+.rad > i {
+  width:  22px;
+  border-radius: 50%;
+}
+.ckb > i {
+  width: 36px;
+  border-radius: 3px;
+}
+.rad:hover > i{ /* HOVER <i> STYLE */
+  box-shadow: inset 0 0 0 3px #fff;
+  background: Silver;
+}
+.rad > input:focus + i { /* FOCUS <i> STYLE */
+  outline: 2px solid blue;
+}
+.rad > input:checked + i{ /* (RADIO CHECKED) <i> STYLE */
+  box-shadow: inset 0 0 0 2px #fff;
+  background: orange;
+}
+/* CHECKBOX */
+.ckb > input + i::after{
+  content: "";
+  display: block;
+  height: 18px;
+  width:  16px;
+  margin: 2px;
+  border-radius: inherit;
+  transition: inherit;
+  background: Silver;
+}
+.ckb > input:focus + i {
+  outline: 1px solid blue;
+}
+.ckb > input:checked + i::after{ /* (RADIO CHECKED) <i> STYLE */
+  margin-left: 16px;
+  background:  orange;
+}
+</style>
+</head>
+<body>
+</form action="/cricri">
+<main>
+  <h1>Emoji Forms!</h1>
+
+<label class="rad">
+  <input type="radio" name="rad1" value="a">
+  <i></i> Radio 1
+</label>
+<label class="rad">
+  <input type="radio" name="rad1" value="b" checked>
+  <i></i> Radio 2
+</label>
+<br>
+
+<br>
+
+<label class="ckb">
+  <input type="checkbox" name="ckb1" value="ac" checked>
+  <i aria-hidden="true"></i> Checkbox 1
+</label>
+<br>
+<label class="ckb">
+  <input type="checkbox" name="ckb2" value="bc">
+  <i aria-hidden="true"></i> Checkbox 2
+</label>
+<p2><h2> Diam : <span id="diam_id"> </span> </h2></p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="diam">
+  </div>
+  <p2><h2> Nbre : <span id="nbre_id"> </span> </h2></p>
+  <div class="slidecontainer">
+  <input type="range" min="1" max="25" value="10" class="slider" id="nbre">
+  </div>
+  <input type="submit" value="Submit">
+  <canvas id="myCanvas" width="300"  style="border:1px solid grey"></canvas>
+
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+let xMax = canvas.height = canvas.width;
+let yMax = xMax;
+const xArray = [50,60,70,80,90,100,110,120,130,170,130];
+const yArray = [7,8,8,9,9,9,10,11,14,14,10];
+var diam = document.getElementById("diam");
+var out_diam = document.getElementById("diam_id");
+
+var nbre = document.getElementById("nbre");
+var out_nbre = document.getElementById("nbre_id");
+
+out_diam.innerHTML = diam.value;
+out_nbre.innerHTML = nbre.value
+
+ctx.arc(xMax/2, xMax/2, xMax/2, 0, 2 * Math.PI);
+ctx.strokeStyle = "red";
+ctx.stroke();
+//ctx.moveTo(150,150);
+
+diam.oninput = function() {
+
+  out_diam.innerHTML = this.value;
+  var xhr_r = new XMLHttpRequest();
+  xhr_r.open("GET", "/diam?" + this.value, true);
+  xhr_r.send();
+  update();
+}
+
+nbre.oninput = function() {
+
+  out_nbre.innerHTML = this.value;
+  var xhr_r = new XMLHttpRequest();
+  xhr_r.open("GET", "/nbre?" + this.value, true);
+  xhr_r.send();
+  //vide();
+  update();
+}
+function vide() {
+// Store the current transformation matrix
+ctx.save();
+
+// Use the identity matrix while clearing the canvas
+ctx.setTransform(1, 0, 0, 1, 0, 0);
+ctx.clearRect();
+
+// Restore the transform
+ctx.restore();
+//ctx.fillStyle = "grey";
+//ctx.fillRect(0,0,150,150);
+ctx.Fill();
+}
+
+function update() {
+   // ctx.clearRect(0, 0, canvas.width, canvas.height);
+	canvas.width = canvas.width;
+    ctx.strokeStyle = 'rgba(0, 0, 0, 1)';
+	for (let i = 1; i < 63; i++) {
+		ctx.arc(150, 150, i+xMax/2, 0, 2 * Math.PI);
+		ctx.stroke();
+			}
+    ctx.restore();
+  	ctx.strokeStyle = "grey";
+	for (let i = 0; i < nbre.value; i++) {
+		ctx.translate( 150,  150);
+		ctx.rotate(-6.28/nbre.value);
+		ctx.translate(-150, -150);
+		ctx.arc(225, 150, diam.value, 0, 2 * Math.PI);
+	ctx.stroke();
+}
+}
+
+
+
+
+
+
+
+</script>
+</form>
+    <p><a href="page1.html">Retour page 1</a></p>
+</body>
+</html>
+
